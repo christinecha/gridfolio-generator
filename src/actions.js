@@ -19,3 +19,12 @@ export const UPDATE_FOLIO_PROPERTY = (stateObj, propertyParents, FolioStyle) => 
     }
   }
 }
+
+export const UPDATE_FOCUS = (newFocus) => {
+  return {
+    type: 'UPDATE_FOCUS',
+    data: {
+      focus: newFocus
+    }
+  }
+}

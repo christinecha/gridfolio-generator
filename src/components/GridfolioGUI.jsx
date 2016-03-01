@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { Slider } from './GridfolioGUI__slider.jsx'
+import { InputField } from './GridfolioGUI__input.jsx'
 import { Gridfolio } from './Gridfolio.jsx'
 import { Folio, FolioStyle } from '../myGridfolio.js'
 import * as action from '../actions.js'
@@ -10,24 +10,30 @@ import * as helper from '../helpers.js'
 
 export class GridfolioGUI extends React.Component{
 
-  getSliders(properties, propertyParents) {
+  getInputs(properties, propertyParents) {
     let propertiesArray = Object.keys(properties)
+
     return propertiesArray.map((propertyName, i) => {
       let propertyValue = properties[propertyName]
 
       if (typeof propertyValue == "string" || typeof propertyValue == "number") {
+        console.log('new input', propertyValue, i)
         return (
-          <Slider
-            key={i}
+          <InputField
+            key={i + propertyValue}
             updateFolio={(stateObj, propertyParents) => this.updateFolio(stateObj, propertyParents)}
             propertyParents={propertyParents}
             propertyName={propertyName}
             propertyValue={propertyValue} />
         )
+      } else if (typeof propertyValue == "object") {
+        let newParents = propertyParents
+            newParents.push(propertyName)
+
+        return this.getInputs(propertyValue, newParents)
       } else {
         return null
       }
-
     })
   }
 
@@ -36,39 +42,41 @@ export class GridfolioGUI extends React.Component{
     dispatch(action.UPDATE_FOLIO_PROPERTY(stateObj, propertyParents, FolioStyle))
   }
 
-  render() {
+  focusOnBlock(e, obj) {
+    e.preventDefault()
+    const { dispatch } = this.props
+    dispatch(action.UPDATE_FOCUS(obj))
+  }
 
-    const { FolioStyle, Folio } = this.props
+  displayToolbar() {
+    const { dispatch, Folio, FolioStyle, focus } = this.props
+    let displayData = FolioStyle.toJS()
+    let parents = ["FolioStyle"]
+
+    if (focus) {
+      const { type, blockIndex, rowIndex } = focus.toJS()
+
+      if (type == "block") {
+        displayData = Folio.toJS()[rowIndex][blockIndex]
+        parents = ["Folio"]
+      }
+    }
+
+    return this.getInputs(displayData, parents)
+  }
+
+  render() {
+    const { FolioStyle, Folio, focus } = this.props
 
     return (
       <div>
         <div className="toolbar">
-          <form onSubmit={() => this.updateFolio()}>
-            <div>
-              block styles
-              {this.getSliders(FolioStyle.toJS().block, ["block"])}
-              <hr />
-            </div>
-            <div>
-              title styles
-              {this.getSliders(FolioStyle.toJS().block.title, ["block", "title"])}
-              <hr />
-            </div>
-            <div>
-              keyword container styles
-              {this.getSliders(FolioStyle.toJS().block.keywords, ["block", "keywords"])}
-              <hr />
-            </div>
-            <div>
-              keyword styles
-              {this.getSliders(FolioStyle.toJS().block.keyword, ["block", "keyword"])}
-              <hr />
-            </div>
-          </form>
+          { this.displayToolbar() }
         </div>
         <Gridfolio
-          FolioStyle={FolioStyle}
-          Folio={Folio} />
+          FolioStyle={ FolioStyle }
+          Folio={ Folio }
+          focusOnBlock={ (e, obj) => this.focusOnBlock(e, obj) } />
       </div>
     )
   }
@@ -78,7 +86,8 @@ export class GridfolioGUI extends React.Component{
 function mapStateToProps(state) {
   return {
     FolioStyle: state.get('FolioStyle'),
-    Folio: state.get('Folio')
+    Folio: state.get('Folio'),
+    focus: state.get('focus')
   }
 }
 

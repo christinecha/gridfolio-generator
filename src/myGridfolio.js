@@ -25,7 +25,8 @@ export const Folio = [
       link: null,
       image: null,
       backgroundColor: "#9BD7E0",
-      titleFontSize: 40
+      titleFontSize: 40,
+      borderRadius: '50%'
     },
     {
       title: "Circlematch",
@@ -44,28 +45,38 @@ export const Folio = [
       isTinted: true
     }
   ],
-  // [
-  //   {
-  //     title: "NYC Jazz Bot",
-  //     brief: "A twitter bot.",
-  //     link: "https://twitter.com/nycjazzapp",
-  //     image: null,
-  //     keywords: ["python", "twitter api"],
-  //     isTinted: true,
-  //     customWidth: 0.2,
-  //     customHeight: 0.5
-  //   },
-  //   {
-  //     title: "Mini Scoop Shop",
-  //     brief: "A tiny eCommerce shop.",
-  //     link: "https://icecreamaccessories.herokuapp.com/",
-  //     image: "url('./src/assets/MiniScoopShop.png')",
-  //     keywords: ["html", "css", "Jquery", "stripe", "node", "express"],
-  //     isTinted: true,
-  //     customWidth: 0.5,
-  //     customHeight: 0.5
-  //   }
-  // ],
+  [
+    {
+      title: "NYC Jazz Bot",
+      brief: "A twitter bot.",
+      link: "https://twitter.com/nycjazzapp",
+      image: null,
+      keywords: ["python", "twitter api"],
+      isTinted: true,
+      customWidth: 0.4,
+      customHeight: 0.5
+    },
+    {
+      title: "Mini Scoop Shop",
+      brief: "A tiny eCommerce shop.",
+      link: "https://icecreamaccessories.herokuapp.com/",
+      image: "url('./src/assets/MiniScoopShop.png')",
+      keywords: ["html", "css", "Jquery", "stripe", "node", "express"],
+      isTinted: true,
+      customWidth: 0.4,
+      customHeight: 0.5
+    },
+    {
+      title: "Mini Scoop Shop",
+      brief: "A tiny eCommerce shop.",
+      link: "https://icecreamaccessories.herokuapp.com/",
+      image: "url('./src/assets/MiniScoopShop.png')",
+      keywords: ["html", "css", "Jquery", "stripe", "node", "express"],
+      isTinted: true,
+      customWidth: 0.2,
+      customHeight: 0.5
+    }
+  ],
   [ // Row 2
     {
       title: "HOMES (Gilad Hekselman)",

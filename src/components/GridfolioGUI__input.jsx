@@ -3,7 +3,7 @@
 import React from 'react'
 import * as helper from '../helpers.js'
 
-export class Slider extends React.Component{
+export class InputField extends React.Component{
 
   constructor(props) {
     super(props)
@@ -30,6 +30,11 @@ export class Slider extends React.Component{
       const { propertyParents, updateFolio } = this.props
       updateFolio(this.state, propertyParents)
     }
+  }
+
+  focusOnBlock(e) {
+    e.preventDefault()
+    console.log('focus')
   }
 
   render() {

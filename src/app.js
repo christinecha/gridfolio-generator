@@ -16,7 +16,8 @@ store.dispatch({
   type: 'GET_INITIAL_STATE',
   data: {
     FolioStyle: FolioStyle,
-    Folio: Folio
+    Folio: Folio,
+    focus: null
   }
 })
 
