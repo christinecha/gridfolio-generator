@@ -16,7 +16,12 @@ export class Slider extends React.Component{
   handleInputChange(e) {
     const { propertyName, propertyParents, propertyValue, updateFolio } = this.props
     let newStateObj = {}
-    newStateObj[propertyName] = e.target.value
+        newStateObj[propertyName] = e.target.value
+
+    if (typeof propertyValue == "number") {
+      newStateObj[propertyName] = parseInt(e.target.value)
+    }
+
     this.setState(newStateObj)
   }
 
@@ -30,12 +35,15 @@ export class Slider extends React.Component{
   render() {
     const { propertyName, propertyPath, propertyValue } = this.props
 
+    let inputType = typeof propertyValue
+
     return (
       <div>
         {propertyName}
         <input
-          value={this.state[propertyName]}
-          onChange={(e) => this.handleInputChange(e)} />
+          type={ inputType }
+          value={ this.state[propertyName] }
+          onChange={ (e) => this.handleInputChange(e) } />
       </div>
     )
   }

@@ -56,10 +56,16 @@ export class Block extends React.Component{
       blockTitlePosition = (blockHeight / 2) - ((block.toJS().titleFontSize || FolioStyle.toJS().block.title.fontSize) / 2)
     }
 
+    let blockHeightIncludingKeywords = blockHeight + parseInt(FolioStyle.toJS().block.keywords.marginTop || null) + parseInt(FolioStyle.toJS().block.keywords.marginBottom || null) + parseInt(FolioStyle.toJS().block.keyword.fontSize * 1.3 || null)
+
+    if (blockHeightIncludingKeywords <= blockHeight) {
+      blockHeightIncludingKeywords = blockHeight
+    }
+
     let blockStyle = {
       outer: {
         width: blockWidth + 'px',
-        height: blockHeight + parseInt(FolioStyle.toJS().block.keywords.marginTop || null) + parseInt(FolioStyle.toJS().block.keywords.marginBottom || null) + parseInt(FolioStyle.toJS().block.keyword.fontSize * 1.3 || null) + 'px',
+        height: blockHeightIncludingKeywords + 'px',
         padding: padding + 'px',
         display: blockDisplay
       },
