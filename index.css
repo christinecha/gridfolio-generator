@@ -1,0 +1,38 @@
+body, * {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.toolbar {
+  height: 100vh;
+  z-index: 100;
+  width: 300px;
+  position: fixed;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+}
+
+.folio-row {
+  margin: 0 auto;
+}
+
+.folio-block {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.folio-block.linked:hover {
+  opacity: .8;
+}
+
+.folio-block--keywords {
+}
+
+.folio-block--keyword {
+  display: inline-block;
+}
