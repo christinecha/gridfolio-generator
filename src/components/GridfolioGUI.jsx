@@ -15,7 +15,7 @@ export class GridfolioGUI extends React.Component{
     return propertiesArray.map((propertyName, i) => {
       let propertyValue = properties[propertyName]
 
-      if (typeof propertyValue == "string") {
+      if (typeof propertyValue == "string" || typeof propertyValue == "number") {
         return (
           <Slider
             key={i}

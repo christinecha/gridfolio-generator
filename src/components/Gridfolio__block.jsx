@@ -59,7 +59,7 @@ export class Block extends React.Component{
     let blockStyle = {
       outer: {
         width: blockWidth + 'px',
-        height: blockHeight + (FolioStyle.toJS().block.keywords.marginTop || null) + (FolioStyle.toJS().block.keywords.marginBottom || null) + (FolioStyle.toJS().block.keyword.fontSize * 1.3 || null) + 'px',
+        height: blockHeight + parseInt(FolioStyle.toJS().block.keywords.marginTop || null) + parseInt(FolioStyle.toJS().block.keywords.marginBottom || null) + parseInt(FolioStyle.toJS().block.keyword.fontSize * 1.3 || null) + 'px',
         padding: padding + 'px',
         display: blockDisplay
       },
