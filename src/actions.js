@@ -1,21 +1,29 @@
 import * as helper from './helpers.js'
 
-export const UPDATE_FOLIO_PROPERTY = (stateObj, propertyParents, FolioStyle) => {
+export const UPDATE_FOLIO_PROPERTY = (stateObj, propertyParents, Folio, FolioStyle, focus) => {
   let propertyName = Object.keys(stateObj)[0]
+  let newFolio = Folio.toJS()
   let newFolioStyle = FolioStyle.toJS()
 
   let path = newFolioStyle
 
-  propertyParents.forEach((parent) => {
-    path = path[parent]
-  })
+  if (propertyParents[0] == "Folio") {
+    path = newFolio[focus.toJS().rowIndex][focus.toJS().blockIndex]
+  }
 
+  propertyParents.forEach((parent, i) => {
+    if (i > 0) {
+      path = path[parent]
+    }
+  })
+// debugger
   path[propertyName] = stateObj[propertyName]
 
   return {
     type: 'UPDATE_FOLIO_PROPERTY',
     data: {
-      FolioStyle: newFolioStyle
+      FolioStyle: newFolioStyle,
+      Folio: newFolio
     }
   }
 }

@@ -11,27 +11,30 @@ export class Keywords extends React.Component{
     if (!keywords) {
       return null
     } else {
+      let keywordStyle = {
+        fontSize: FolioStyle.toJS().block.keyword.fontSize + 'px',
+        fontFamily: FolioStyle.toJS().block.keyword.fontFamily,
+        textTransform: FolioStyle.toJS().block.keyword.textTransform,
+        margin: '0 2px',
+        color: FolioStyle.toJS().block.keyword.color,
+        backgroundColor: FolioStyle.toJS().block.keyword.backgroundColor,
+        padding: FolioStyle.toJS().block.keyword.padding,
+        fontWeight: FolioStyle.toJS().block.keyword.fontWeight,
+      }
+
       return keywords.map((keyword, i) => {
-
-        let keywordStyle = {
-          fontSize: FolioStyle.toJS().block.keyword.fontSize + 'px',
-          fontFamily: FolioStyle.toJS().block.keyword.fontFamily,
-          textTransform: FolioStyle.toJS().block.keyword.textTransform,
-          margin: '0 2px',
-          color: FolioStyle.toJS().block.keyword.color,
-          backgroundColor: FolioStyle.toJS().block.keyword.backgroundColor,
-          padding: FolioStyle.toJS().block.keyword.padding,
-          fontWeight: FolioStyle.toJS().block.keyword.fontWeight,
+        if (keyword && keyword.length > 0) {
+          return (
+            <div
+              style={ keywordStyle }
+              className="folio-block--keyword"
+              key={ i }>
+              { keyword }
+            </div>
+          )
+        } else {
+          return null
         }
-
-        return (
-          <div
-            style={ keywordStyle }
-            className="folio-block--keyword"
-            key={ i }>
-            { keyword }
-          </div>
-        )
       })
     }
   }

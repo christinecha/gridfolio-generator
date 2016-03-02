@@ -32,11 +32,6 @@ export class InputField extends React.Component{
     }
   }
 
-  focusOnBlock(e) {
-    e.preventDefault()
-    console.log('focus')
-  }
-
   render() {
     const { propertyName, propertyPath, propertyValue } = this.props
 

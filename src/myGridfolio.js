@@ -8,11 +8,10 @@ export const FolioStyle = style.Default
 export const Folio = [
   [ // Row 0
     {
-      title: "Gridfolio: a simple layout for developers >>",
-      brief: "An in-browser and iOS native game written in React and React-Native.",
+      title: "Sample Title",
       link: "https://github.com/christinecha/gridfolio",
-      image: null,
-      titleColor: '#818182',
+      image: "",
+      titleColor: "#818182",
       titleFontSize: 16,
       customHeight: 0.03,
       borderRadius: '0'
@@ -21,9 +20,9 @@ export const Folio = [
   [ // Row 1
     {
       title: "Christine Cha",
-      brief: null,
-      link: null,
-      image: null,
+      brief: "",
+      link: "",
+      image: "",
       backgroundColor: "#9BD7E0",
       titleFontSize: 40,
       borderRadius: '50%'

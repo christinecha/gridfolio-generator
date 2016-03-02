@@ -11,23 +11,28 @@ import * as helper from '../helpers.js'
 export class GridfolioGUI extends React.Component{
 
   getInputs(properties, propertyParents) {
-    let propertiesArray = Object.keys(properties)
+    const { dispatch, focus } = this.props
+    let propertiesArray = properties? Object.keys(properties) : []
+    let blockIdentifier = null
+
+    if (focus) {
+      blockIdentifier = focus.toJS().rowIndex + '' + focus.toJS().blockIndex
+    }
 
     return propertiesArray.map((propertyName, i) => {
       let propertyValue = properties[propertyName]
 
       if (typeof propertyValue == "string" || typeof propertyValue == "number") {
-        console.log('new input', propertyValue, i)
         return (
           <InputField
-            key={i + propertyValue}
+            key={i + blockIdentifier}
             updateFolio={(stateObj, propertyParents) => this.updateFolio(stateObj, propertyParents)}
             propertyParents={propertyParents}
             propertyName={propertyName}
             propertyValue={propertyValue} />
         )
       } else if (typeof propertyValue == "object") {
-        let newParents = propertyParents
+        let newParents = propertyParents.slice()
             newParents.push(propertyName)
 
         return this.getInputs(propertyValue, newParents)
@@ -38,8 +43,8 @@ export class GridfolioGUI extends React.Component{
   }
 
   updateFolio(stateObj, propertyParents) {
-    const { dispatch, FolioStyle } = this.props
-    dispatch(action.UPDATE_FOLIO_PROPERTY(stateObj, propertyParents, FolioStyle))
+    const { dispatch, Folio, FolioStyle, focus } = this.props
+    dispatch(action.UPDATE_FOLIO_PROPERTY(stateObj, propertyParents, Folio, FolioStyle, focus))
   }
 
   focusOnBlock(e, obj) {
