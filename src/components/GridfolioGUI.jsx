@@ -47,6 +47,12 @@ export class GridfolioGUI extends React.Component{
     dispatch(action.UPDATE_FOLIO_PROPERTY(stateObj, propertyParents, Folio, FolioStyle, focus))
   }
 
+  removeFocus(e) {
+    e.preventDefault()
+    const { dispatch } = this.props
+    dispatch(action.UPDATE_FOCUS(null))
+  }
+
   focusOnBlock(e, obj) {
     e.preventDefault()
     const { dispatch } = this.props
@@ -64,6 +70,14 @@ export class GridfolioGUI extends React.Component{
       if (type == "block") {
         displayData = Folio.toJS()[rowIndex][blockIndex]
         parents = ["Folio"]
+        return (
+          <div>
+            <button onClick={(e) => this.removeFocus(e)}>back to overall styles</button>
+            {this.getInputs(displayData, parents)}
+            <button>add a block to this row</button>
+            <button>remove this block</button>
+          </div>
+        )
       }
     }
 
